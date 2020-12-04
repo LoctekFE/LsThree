@@ -39,13 +39,13 @@ new LsThree({
     url: './assets/m1.jpg',
 }).then((tableModel) => {
     tableModel.renderTableTop({
-		x: -60,
-		y: -40,
-		width: 120,
-		height: 80,
-		depth: 3,
-		radius: 5,
-	}, 'default')
+        x: -60,
+        y: -40,
+        width: 120,
+        height: 80,
+        depth: 3,
+        radius: 5,
+    }, 'default')
 })
 ```
 ## 基础功能
