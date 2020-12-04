@@ -4,7 +4,7 @@ const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 
 const port = 9000
 
-version = 'v0.0.1'
+version = '0.0.1'
 
 let plugins = [
     new WebpackBar()
@@ -38,7 +38,7 @@ module.exports = {
         extensions: ['.js', '.ts', '.tsx', '.d.ts']
     },
     output: {
-        filename: `LsThree.${version}.min.js`
+        filename: `LsThree-${version}.min.js`
     },
     mode: process.env.NODE_ENV,
     performance: {
