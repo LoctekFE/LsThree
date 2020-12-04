@@ -6,7 +6,7 @@
 	 yarn install
 ## 快速上手
 ```html
-<script src="./LsThree-0.0.1.min.js"></script>
+<script src="./LsThree-0.0.1.js"></script>
 <div id="app"></div>
 
 // 你只需要几行代码就能展示出一个3D模型，并且只需要调用简单的几个方法就能动态修改这个模型
