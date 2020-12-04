@@ -38,7 +38,7 @@ module.exports = {
         extensions: ['.js', '.ts', '.tsx', '.d.ts']
     },
     output: {
-        filename: `LsThree-${version}.min.js`
+        filename: `LsThree-${version}.js`
     },
     mode: process.env.NODE_ENV,
     performance: {
