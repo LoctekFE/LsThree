@@ -1,3 +1,3 @@
-import LoDesk from './loDesk'
+import LsThree from './LsThree'
 
-export default LoDesk
+export default LsThree

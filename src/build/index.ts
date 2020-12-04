@@ -1,3 +1,3 @@
-import LoDesk  from '../package/loDesk'
+import LsThree  from '../package/LsThree'
 
-(window as any).LoDesk = LoDesk
+(window as any).LsThree = LsThree

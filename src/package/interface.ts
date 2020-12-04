@@ -6,7 +6,7 @@ interface CommonTypes {
 
 export type RectTypes = { width: number, height: number } & CommonTypes
 
-export interface ILoDesk {
+export interface ILsThree {
     renderQueue: { [k: string]: any } | undefined;
     el?: HTMLElement | null;
     topMaterial?: unknown;

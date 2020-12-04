@@ -1,11 +1,11 @@
 import Three from '../lib/index';
-import { DefaultSetting, ILoDesk, RectTypes } from './interface'
+import { DefaultSetting, ILsThree, RectTypes } from './interface'
 
 const defaultOptions: DefaultSetting.Options = {
     helper: false
 }
 
-class LoDesk implements ILoDesk {
+class LsThree implements ILsThree {
     options: DefaultSetting.Options;
     renderQueue: { [k: string]: any } = {};
     el?: HTMLElement | null;
@@ -260,5 +260,5 @@ function roundedRect(shape: any, props: RectTypes, type: string) {
 
 }
 
-export default LoDesk
+export default LsThree
 
