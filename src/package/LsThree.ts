@@ -1,23 +1,23 @@
 import Three from '../lib/index';
 import { DefaultSetting, ILsThree, RectTypes } from './interface'
 
-const defaultOptions: DefaultSetting.Options = {
+const defaultOptions: DefaultSetting.InitOptions = {
     helper: false
 }
 
 class LsThree implements ILsThree {
-    options: DefaultSetting.Options;
-    renderQueue: { [k: string]: any } = {};
+    options: DefaultSetting.InitOptions;
+    renderQueue: { [k: string]: THREE.Mesh } = {};
     el?: HTMLElement | null;
     topMaterial?: unknown;
     scene = new Three.Scene();
-    camera = new Three.Camera;
+    camera = new Three.Camera();
     renderer = new Three.WebGLRenderer();
-    props?: any;
+    props?: RectTypes;
     shapeType?: string;
-    topRender?: any;
-    modelGroup?: any;
-    controls?: any;
+    topRender?: THREE.Mesh;
+    modelGroup = new Three.Object3D();
+    controls: any;
     constructor(options: Object) {
         //预处理
         this.options = {...defaultOptions, ...options};
@@ -39,9 +39,9 @@ class LsThree implements ILsThree {
         return this
     }
 
-    createTopMaterial(options: any) {
+    createTopMaterial(options: DefaultSetting.MaterialOptions) {
 
-        let clipPlanes: any[] = []
+        let clipPlanes: Array<THREE.Plane> = []
         let steps = 30
         let r = 0
         if (options.hole) {
@@ -109,7 +109,7 @@ class LsThree implements ILsThree {
         this.render()
     }
 
-    renderTableTop(props: any, type = 'default') {
+    renderTableTop(props: RectTypes, type = 'default') {
         this.props = props;
         this.shapeType = type;
         var topRender = roundedRect(new Three.Shape(), props, type);
@@ -120,7 +120,7 @@ class LsThree implements ILsThree {
             topRender,
             {
                 depth: props.depth,
-                bevelEnabled: !!props.bevel,
+                bevelEnabled: props.bevel,
                 bevelSize: 1,
                 bevelSegments: 1,
                 bevelThickness: 0,
@@ -148,7 +148,7 @@ class LsThree implements ILsThree {
         }
         geometry.uvsNeedUpdate = true;
 
-        this.topRender = new Three.Mesh(geometry, this.topMaterial);
+        this.topRender = new Three.Mesh(geometry, this.topMaterial) as THREE.Mesh;
 
         this.tableTopPositionReset();
         this.megerQueue('topTable', this.topRender);
@@ -156,7 +156,7 @@ class LsThree implements ILsThree {
         this.megerModel();
     }
 
-    megerQueue(key: string, target: any) {
+    megerQueue(key: string, target: THREE.Mesh) {
         this.renderQueue[key] = target;
     }
 
@@ -173,21 +173,22 @@ class LsThree implements ILsThree {
     }
 
     tableTopPositionReset() {
-        this.topRender.rotation.y = 0;
-        this.topRender.rotation.x = -1.6;
-        this.topRender.rotation.z = 0;
+        const t = this.topRender as THREE.Mesh
+        t.rotation.y = 0;
+        t.rotation.x = -1.6;
+        t.rotation.z = 0;
         this.render();
     }
 
-    setTopTable(props: any) {
+    setTopTable(props: RectTypes) {
         this.renderTableTop(props, this.shapeType);
     }
 
-    setMaterial(options: any) {
+    setMaterial(options: DefaultSetting.MaterialOptions) {
         return new Promise(async (resolve: Function) => {
             await this.createTopMaterial(options);
             resolve();
-            this.renderTableTop(this.props, this.shapeType);
+            this.renderTableTop(this.props as RectTypes, this.shapeType);
         })
     }
 
@@ -210,7 +211,7 @@ class LsThree implements ILsThree {
 }
 
 
-function roundedRect(shape: any, props: RectTypes, type: string) {
+function roundedRect(shape: THREE.Shape, props: RectTypes, type: string) {
 
     const shapeTarget = {
         'hole': createHole,
