@@ -60,7 +60,7 @@ new LsThree({
 ## 增强
 - [x] webpack + typescript 封装
 - [ ] 打包后canvas加载图片跨域问题 
-- [ ] 参数声明
+- [x] 参数声明
 - [ ] 更多模型
 	- [ ] 控制台
 	- [ ] 桌脚
