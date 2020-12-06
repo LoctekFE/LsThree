@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "set NODE_ENV=development&&webpack-dev-server",
-    "build-minjs": " set NODE_ENV=production&&webpack"
+    "buildjs": " set NODE_ENV=production&&webpack"
   },
   "dependencies": {
     "clean-webpack-plugin": "^3.0.0",

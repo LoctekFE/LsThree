@@ -60,8 +60,8 @@ class LsThree implements ILsThree {
                 }
             }
         }
-
         return new Promise((resolve: Function) => {
+            Three.ImageLoader.prototype.setCrossOrigin('anonymous')
             new Three.ImageLoader().load(options.url, (img: unknown) => {
                 let texture = new Three.Texture(img);
                 texture.needsUpdate = true;

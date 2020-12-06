@@ -24,7 +24,7 @@ const tableModel = new LsThree({
 }).mount("app");
 
 const defaultMaterial = {
-    url: './assets/m1.jpg',
+    url: 'https://img.yzcdn.cn/vant/cat.jpeg',
 }
 
 tableModel.createTopMaterial(defaultMaterial).then(() => {
@@ -36,7 +36,7 @@ tableModel.createTopMaterial(defaultMaterial).then(() => {
 new LsThree({
     helper: true
 }).mount("app").createTopMaterial({
-    url: './assets/m1.jpg',
+    url: 'https://img.yzcdn.cn/vant/cat.jpeg',
 }).then((tableModel) => {
     tableModel.renderTableTop({
         x: -60,
@@ -59,7 +59,7 @@ new LsThree({
 
 ## 增强
 - [x] webpack + typescript 封装
-- [ ] 打包后canvas加载图片跨域问题 
+- [x] 打包后canvas加载图片跨域问题 
 - [x] 参数声明
 - [ ] 更多模型
 	- [ ] 控制台
