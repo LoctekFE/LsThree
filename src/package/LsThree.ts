@@ -156,7 +156,7 @@ class LsThree implements ILsThree {
         this.megerModel();
     }
 
-    renderControl(url: string) {
+    renderOBJ(name:string, url: string) {
         const that = this
         Three.OBJLoader(url, function(obj: any) {
             obj.scale.x = obj.scale.y = obj.scale.z = 100;
@@ -164,7 +164,7 @@ class LsThree implements ILsThree {
             let mesh = obj;
             mesh.position.y = -50;
             that.scene.add(mesh);
-            console.log('success loader', mesh)
+            console.log('success loader',name, mesh)
          })
     }
 

@@ -17,6 +17,8 @@ let defaultMaterial = {
     url: './assets/m1.jpg',
 }
 
+tableModel.renderOBJ('demo', './assets/demo.obj');
+
 tableModel.createTopMaterial(defaultMaterial).then(() => {
     tableModel.renderTableTop(topProps, 'default')
 })
