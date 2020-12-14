@@ -3992,6 +3992,11 @@ text-table@^0.2.0:
   resolved "https://registry.npm.taobao.org/text-table/download/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
+three-obj-mtl-loader@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npm.taobao.org/three-obj-mtl-loader/download/three-obj-mtl-loader-1.0.3.tgz#2901efd5b77cce29b61733c63f196432ee653667"
+  integrity sha1-KQHv1bd8zim2FzPGPxlkMu5lNmc=
+
 three@^0.123.0:
   version "0.123.0"
   resolved "https://registry.npm.taobao.org/three/download/three-0.123.0.tgz#3bb6d8f908a432eb7cd450f7eab6dd40fde53085"

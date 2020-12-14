@@ -156,6 +156,19 @@ class LsThree implements ILsThree {
         this.megerModel();
     }
 
+    renderControl(url: string) {
+        const that = this
+        Three.OBJLoader(url, function(obj: any) {
+            obj.scale.x = obj.scale.y = obj.scale.z = 100;
+            obj.rotation.y = 500;
+            let mesh = obj;
+            mesh.position.y = -50;
+            that.scene.add(mesh);
+            console.log('success loader', mesh)
+         })
+    }
+
+
     megerQueue(key: string, target: THREE.Mesh) {
         this.renderQueue[key] = target;
     }
