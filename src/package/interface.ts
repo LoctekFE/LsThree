@@ -11,6 +11,7 @@ export type RectTypes = { radius: number } & CommonTypes
 
 export interface ILsThree {
     renderQueue: { [k: string]: THREE.Mesh };
+    objTarget: { [k: string]: any};
     el?: HTMLElement | null;
     topMaterial?: unknown;
     scene: THREE.Scene;

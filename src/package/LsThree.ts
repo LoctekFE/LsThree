@@ -8,11 +8,13 @@ const defaultOptions: DefaultSetting.InitOptions = {
 class LsThree implements ILsThree {
     options: DefaultSetting.InitOptions;
     renderQueue: { [k: string]: THREE.Mesh } = {};
+    objTarget: { [k:string]:any} = {}
     el?: HTMLElement | null;
     topMaterial?: unknown;
     scene = new Three.Scene();
     camera = new Three.Camera();
     renderer = new Three.WebGLRenderer();
+    light = new Three.SpotLight();
     props?: RectTypes;
     shapeType?: string;
     topRender?: THREE.Mesh;
@@ -92,7 +94,20 @@ class LsThree implements ILsThree {
     }
 
     createLight() {
-        // ~~~~
+        let spotLight = new Three.SpotLight('#ffffff');
+        spotLight.position.set(0,100,100);
+        spotLight.castShadow = true;
+        spotLight.shadow.camera.near = 100;
+        spotLight.distance = 0;
+        spotLight.angle = 1;
+        let spotLight2 = new Three.SpotLight('#ffffff');
+        spotLight2.position.set(0,100,-100);
+        spotLight2.castShadow = true;
+        spotLight2.shadow.camera.near = 100;
+        spotLight2.distance = 0;
+        spotLight2.angle = 1;
+        this.scene.add(spotLight)
+        this.scene.add(spotLight2)
     }
 
     createRenderer() {
@@ -156,16 +171,55 @@ class LsThree implements ILsThree {
         this.megerModel();
     }
 
-    renderOBJ(name:string, url: string) {
+    renderOBJ(name: string,objUrl: string, objConfig: any, mtlUrl?: string) {
+        if(!name) {
+            console.warn("[Table render] please input obj name")
+            return false
+        }
+        if(!objUrl) {
+            console.warn("[Table render] please input .obj file url")
+            return false
+        }
         const that = this
-        Three.OBJLoader(url, function(obj: any) {
-            obj.scale.x = obj.scale.y = obj.scale.z = 100;
-            obj.rotation.y = 500;
-            let mesh = obj;
-            mesh.position.y = -50;
-            that.scene.add(mesh);
-            console.log('success loader',name, mesh)
-         })
+        if(this.objTarget[name]) {
+            const object = this.objTarget[name]
+            assignObj(object, objConfig)
+            this.render();
+            return false;
+        }
+        let mtlPromise = new Promise((resolve: Function)=>{resolve(null)});
+        if(mtlUrl) {
+            let mtlLoader = new Three.MTLLoader();
+            mtlPromise = new Promise((resolve: Function) => {
+                mtlLoader.load(mtlUrl, (materials: any) => {
+                    materials.preload();
+                    resolve(materials)
+                })
+            })
+        }
+        mtlPromise.then(materials => {
+            let objLoader = new Three.OBJLoader();
+            objLoader.setMaterials(materials);
+            objLoader.load(objUrl, (object: any)=>{
+                object.name = name
+                assignObj(object, objConfig);
+                that.objTarget[name] = object;
+                that.scene.add( object );
+                that.render();
+            })
+        })
+        
+        function assignObj(object: any, objConfig: any) {
+            object.scale.x = objConfig?.scale?.x ?? 1
+            object.scale.y = objConfig?.scale?.y ?? 1
+            object.scale.z = objConfig?.scale?.z ?? 1
+            object.position.x = objConfig?.position?.x ?? 0
+            object.position.y = objConfig?.position?.y ?? 0
+            object.position.z = objConfig?.position?.z ?? 0
+            object.rotateOnAxis(new Three.Vector3(1,0,0), objConfig?.rotate?.x ?? 0)
+            object.rotateOnAxis(new Three.Vector3(0,1,0), objConfig?.rotate?.y ?? 0)
+            object.rotateOnAxis(new Three.Vector3(0,0,1), objConfig?.rotate?.z ?? 0)
+        }
     }
 
 

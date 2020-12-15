@@ -61,6 +61,7 @@ new LsThree({
 - [x] webpack + typescript 封装
 - [x] 打包后canvas加载图片跨域问题 
 - [x] 参数声明
+- [x] 从外引入obj格式模型及mtl材质
 - [ ] 更多模型
 	- [ ] 控制台
 	- [ ] 桌脚
