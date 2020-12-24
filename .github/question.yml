@@ -1,0 +1,19 @@
+name: Create Comment
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  create-comment:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'question'
+    steps:
+      - name: Create comment
+        uses: actions-cool/issues-helper@v1
+        with:
+          actions: 'create-comment'
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hello ${{ github.event.issue.user.login }}. Add some comments.
+            你好 ${{ github.event.issue.user.login }}。巴拉巴拉。
