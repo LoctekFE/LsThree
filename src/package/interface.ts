@@ -10,8 +10,8 @@ interface CommonTypes {
 export type RectTypes = { radius: number } & CommonTypes
 
 export interface ILsThree {
-    renderQueue: { [k: string]: THREE.Mesh };
-    objTarget: { [k: string]: any};
+    renderQueue: Record<string, THREE.Mesh>;
+    objTarget: Record<string, any>;
     el?: HTMLElement | null;
     topMaterial?: unknown;
     scene: THREE.Scene;
